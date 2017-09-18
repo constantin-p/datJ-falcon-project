@@ -1,2 +1,2 @@
-# Java project boilerplate
-https://github.com/constantin-p/dat16j-java-boilerplate
+# Java SWD assignment project
+https://github.com/constantin-p/dat16j-falcon-project
