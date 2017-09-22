@@ -83,13 +83,23 @@ public class ServiceFormController extends ModalBaseController {
     @Override
     public void handleOKAction(ActionEvent event) {
         if (create) {
-//            boolean success = ValidationHandler.showError(errorLabel,
-//                    ValidationHandler.validateClientDBOperation(Client.dbInsert(client)));
-//
-//            if (success) {
-//                client = Client.dbGetByEmail(client.email.getValue());
-            super.handleOKAction(event);
-//            }
+            boolean success = ValidationHandler.showError(errorLabel,
+                   ValidationHandler.validateServiceDBOperation(Service.dbInsert(service)));
+
+            if (success) {
+                service = Service.dbGetByName(service.name.getValue());
+                super.handleOKAction(event);
+            }
+        } else {
+            boolean success = ValidationHandler.showError(errorLabel,
+                ValidationHandler.validateServiceDBOperation(
+                    Service.dbUpdate(service.id, service.name.get(), service.minAge.get(), service.description.get())
+                ));
+
+            if (success) {
+                service = Service.dbGetByName(service.name.getValue());
+                super.handleOKAction(event);
+            }
         }
     }
 

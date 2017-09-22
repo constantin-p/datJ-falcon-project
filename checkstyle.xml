@@ -70,7 +70,7 @@
         <module name="LocalVariableName" />
         <module name="ParameterName" />
         <module name="StaticVariableName" />
-        <module name="UnnecessaryParentheses" />
+        <!-- <module name="UnnecessaryParentheses" /> -->
         <module name="PackageDeclaration" />
 
 
@@ -92,7 +92,7 @@
         <module name="StringLiteralEquality" />
         <module name="SuperClone" />
         <module name="SuperFinalize" />
-        <module name="IllegalCatch" />
+        <!-- <module name="IllegalCatch" /> -->
         <module name="IllegalThrows" />
         <module name="DefaultComesLast" />
         <module name="FallThrough" />

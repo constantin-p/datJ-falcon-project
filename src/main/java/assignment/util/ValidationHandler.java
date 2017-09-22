@@ -4,8 +4,10 @@ import javafx.scene.control.Label;
 
 public final class ValidationHandler {
     // Error messages
+    public static final String ERROR_DB_CONNECTION = "DB connection error";
 
     public static final String ERROR_SERVICE_NAME_REQUIRED = "Name required";
+    public static final String ERROR_SERVICE_NAME_DUPLICATE = "Name already registered";
     public static final String ERROR_SERVICE_NAME_SHORT = "Name too short (<2)";
     public static final String ERROR_SERVICE_NAME_LONG = "Name too long (>25)";
     public static final String ERROR_SERVICE_NAME_INVALID = "Invalid name (non-alphanumeric)";
@@ -68,7 +70,7 @@ public final class ValidationHandler {
     public static Response validateSessionDescription(String description) {
         if (description == null || description.isEmpty()) {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_REQUIRED);
-        } else if (!description.matches("[a-zA-Z0-9]+")) {
+        } else if (!description.matches("[a-zA-Z0-9 ]+")) {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_INVALID);
         } else if (description.length() <= 1) {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_SHORT);
@@ -76,5 +78,14 @@ public final class ValidationHandler {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_LONG);
         }
         return new Response(true);
+    }
+
+    public static Response validateServiceDBOperation(int returnValue) {
+        if (returnValue == 1) {
+            return new Response(true);
+        } else if (returnValue == -1) {
+            return new Response(false, ERROR_SERVICE_NAME_DUPLICATE);
+        }
+        return new Response(false, ValidationHandler.ERROR_DB_CONNECTION);
     }
 }

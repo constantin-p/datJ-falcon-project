@@ -36,14 +36,6 @@ public class RootController {
 
         loadSection(ServicesController.getAccessTypeName(),
             () -> new ServicesController(this));
-        loadSection(ServicesController.getAccessTypeName(),
-            () -> new ServicesController(this));
-        loadSection(ServicesController.getAccessTypeName(),
-            () -> new ServicesController(this));
-        loadSection(ServicesController.getAccessTypeName(),
-            () -> new ServicesController(this));
-        loadSection(ServicesController.getAccessTypeName(),
-            () -> new ServicesController(this));
     }
 
     private void loadSection(String accessTypeName, Supplier<UISection> createSectionControllerRequest) {

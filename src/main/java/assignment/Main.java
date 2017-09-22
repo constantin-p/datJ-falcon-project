@@ -1,11 +1,14 @@
 package assignment;
 
 import assignment.core.RootController;
+import assignment.util.CacheEngine;
+import assignment.util.Config;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import store.db.Database;
 
 import java.io.IOException;
 
@@ -18,6 +21,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
+
+        Config.loadConfig("cache", "config/cache.properties");
+        Config.loadConfig("store", "config/store_secret.properties");
+        CacheEngine.configInstance(Config.getConfig("cache"));
+        Database.configInstance(Config.getConfig("store"));
 
         initRootLayout();
     }

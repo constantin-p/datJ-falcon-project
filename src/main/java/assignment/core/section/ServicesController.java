@@ -3,6 +3,8 @@ package assignment.core.section;
 import assignment.core.RootController;
 import assignment.model.Service;
 
+import assignment.util.CacheEngine;
+import assignment.util.DBOperation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+
+import java.util.List;
 
 public class ServicesController implements UISection {
     private static final String ACCESS_TYPE_NAME = "services";
@@ -60,7 +64,7 @@ public class ServicesController implements UISection {
     public void handleAddAction(ActionEvent event) {
         Service service = rootController.modalDispatcher.showCreateServiceModal(null);
         if (service != null) {
-            serviceList.add(service);
+            CacheEngine.markForUpdate("services");
         }
     }
 
@@ -68,7 +72,14 @@ public class ServicesController implements UISection {
      *  Helpers
      */
     private void populateTableView() {
-        serviceList.add(new Service("paintball", 12, "--"));
+        CacheEngine.get("services", new DBOperation<>(() ->
+            Service.dbGetAll(), (List<Service> services) -> {
+
+            serviceList.clear();
+            services.forEach(entry -> {
+                serviceList.add(entry);
+            });
+        }));
     }
 
     private Callback<TableColumn<Service, String>, TableCell<Service, String>> getActionCellFactory() {
@@ -92,7 +103,7 @@ public class ServicesController implements UISection {
                                 System.out.println("Open edit");
                                 Service updatedService = rootController.modalDispatcher.showEditServiceModal(null, service);
                                 if (updatedService != null) {
-                                    serviceList.add(service);
+                                    CacheEngine.markForUpdate("services");
                                 }
                             });
                             deleteBtn.setOnAction((ActionEvent event) -> {
