@@ -1,5 +1,6 @@
 package assignment.core.modal;
 
+import assignment.model.Booking;
 import assignment.model.Service;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -62,6 +63,7 @@ public class ModalDispatcher {
         }
     }
 
+    //ServiceForm
     public Service showCreateServiceModal(Stage stage) {
         return (Service) showModal(stage, (Stage modalStage) -> {
             return new ServiceFormController(this, modalStage,
@@ -73,6 +75,15 @@ public class ModalDispatcher {
         return (Service) showModal(stage, (Stage modalStage) -> {
             return new ServiceFormController(this, modalStage,
                     false, new Service(service.id, service.name.get(), service.minAge.get(), service.description.get()));
+        });
+    }
+
+
+    //BookingForm
+    public Booking showCreateBookingModal(Stage stage) {
+        return (Booking) showModal(stage, (Stage modalStage) -> {
+            return new BookingFormController(this, modalStage,
+                    true, new Service());
         });
     }
 }

@@ -1,6 +1,7 @@
 package assignment.core;
 
 import assignment.core.modal.ModalDispatcher;
+import assignment.core.section.BookingsController;
 import assignment.core.section.ServicesController;
 import assignment.core.section.UISection;
 
@@ -36,6 +37,8 @@ public class RootController {
 
         loadSection(ServicesController.getAccessTypeName(),
             () -> new ServicesController(this));
+        loadSection(BookingsController.getAccessTypeName(),
+                () -> new BookingsController(this));
     }
 
     private void loadSection(String accessTypeName, Supplier<UISection> createSectionControllerRequest) {
