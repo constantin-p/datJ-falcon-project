@@ -94,11 +94,11 @@
         <module name="SuperFinalize" />
         <module name="IllegalCatch" />
         <module name="IllegalThrows" />
-        <module name="ExplicitInitialization" />
+        <!-- <module name="ExplicitInitialization" />  -->
         <module name="DefaultComesLast" />
         <module name="FallThrough" />
         <module name="MultipleVariableDeclarations" />
-        <module name="VisibilityModifier" />
+        <!--  <module name="VisibilityModifier" />   -->
         <module name="FinalClass" />
         <module name="HideUtilityClassConstructor" />
 
