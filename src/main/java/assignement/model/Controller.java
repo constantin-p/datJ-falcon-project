@@ -1,4 +1,4 @@
-package assignement;
+package assignement.model;
 
 import assignement.model.Service;
 import javafx.fxml.FXML;

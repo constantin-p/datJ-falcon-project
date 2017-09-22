@@ -43,7 +43,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>assignement.Main</mainClass>
+                    <mainClass>assignement.model.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
