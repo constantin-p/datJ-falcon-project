@@ -1,13 +1,15 @@
 package assignement.model;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Service {
 
-    private StringProperty name;
-    private IntegerProperty ageMinimum;
-    private StringProperty description;
+    private StringProperty name = new SimpleStringProperty(this, "name", "");
+    private IntegerProperty ageMinimum = new SimpleIntegerProperty(this, "ageMinimum", 0);
+    private StringProperty description = new SimpleStringProperty(this, "description", "");
 
     public Service() {
         this.name.set("name here");
@@ -56,5 +58,4 @@ public class Service {
     public void setDescription(String description) {
         this.description.set(description);
     }
-
 }

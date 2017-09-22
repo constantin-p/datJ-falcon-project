@@ -1,5 +1,6 @@
-package sample;
+package assignement;
 
+import assignement.model.Service;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,11 +13,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Service example = new Service("Paintball", 6, "This is a game. This game is nice, add it to your cart.");
+        Controller exampleController = new Controller(example);
+
         FXMLLoader loader = new FXMLLoader(classLoader.getResource("templates/sample.fxml"));
+        loader.setController(exampleController);
         Parent root = loader.load();
 
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 400, 350));
         primaryStage.show();
     }
 

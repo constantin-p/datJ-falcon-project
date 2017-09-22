@@ -98,7 +98,7 @@
         <module name="DefaultComesLast" />
         <module name="FallThrough" />
         <module name="MultipleVariableDeclarations" />
-        <module name="VisibilityModifier" />
+        <!-- <module name="VisibilityModifier" />  -->
         <module name="FinalClass" />
         <module name="HideUtilityClassConstructor" />
 
