@@ -21,4 +21,5 @@ public class AccessType {
         this.id = id;
         this.name = new SimpleStringProperty(name);
     }
+
 }
