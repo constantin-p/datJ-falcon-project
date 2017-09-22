@@ -1,19 +1,28 @@
 package assignment.core.section;
 
+import assignment.core.Controller;
 import assignment.core.RootController;
 import assignment.model.Service;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+
+import java.io.IOException;
 
 public class ServicesController implements UISection {
     private static final String ACCESS_TYPE_NAME = "services";
@@ -43,6 +52,31 @@ public class ServicesController implements UISection {
         actionColumn.getStyleClass().add("align-center");
 
         tableView.getColumns().addAll(nameColumn, minAgeColumn, actionColumn);
+        tableView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    Service example = tableView.getSelectionModel().getSelectedItem();
+                    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+                    Controller exampleController = new Controller(example);
+
+                    FXMLLoader loader = new FXMLLoader(classLoader.getResource("templates/sample.fxml"));
+                    loader.setController(exampleController);
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Stage detailsWindow = new Stage();
+                    detailsWindow.setTitle("Hello World");
+                    detailsWindow.setScene(new Scene(root, 400, 350));
+                    detailsWindow.show();
+                    System.out.println(tableView.getSelectionModel().getSelectedItem());
+                }
+            }
+        });
         tableView.setItems(serviceList);
 
         populateTableView();
