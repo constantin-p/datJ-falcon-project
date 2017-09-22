@@ -129,4 +129,19 @@ public class Service implements Storable {
             return 0;
         }
     }
+
+    public static int dbDelete(String serviceID) {
+
+
+        HashMap<String, String> whitelist = new HashMap<>();
+        whitelist.put("id", serviceID);
+
+        try {
+            return Database.getTable(DB_TABLE_NAME)
+                    .delete(whitelist, new HashMap<>());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

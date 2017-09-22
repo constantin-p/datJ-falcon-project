@@ -108,6 +108,10 @@ public class ServicesController implements UISection {
                             });
                             deleteBtn.setOnAction((ActionEvent event) -> {
                                 System.out.println("Delete");
+                                if (service.id != null) {
+                                    Service.dbDelete(service.id);
+                                    CacheEngine.markForUpdate("services");
+                                }
                             });
                             HBox buttons = new HBox(6);
                             buttons.setAlignment(Pos.CENTER);
