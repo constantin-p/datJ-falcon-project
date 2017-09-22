@@ -68,7 +68,7 @@ public final class ValidationHandler {
     public static Response validateSessionDescription(String description) {
         if (description == null || description.isEmpty()) {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_REQUIRED);
-        } else if (!description.matches("[a-zA-Z0-9]+")) {
+        } else if (!description.matches("[a-zA-Z0-9 ]+")) {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_INVALID);
         } else if (description.length() <= 1) {
             return new Response(false, ERROR_SERVICE_DESCRIPTION_SHORT);

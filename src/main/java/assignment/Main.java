@@ -38,7 +38,7 @@ public class Main extends Application {
             Parent layout = loader.load();
 
             primaryStage.setScene(new Scene(layout, 600, 500));
-            primaryStage.setTitle("-- REPLACE THIS --");
+            primaryStage.setTitle("Adventure ALLEY");
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
