@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 
 <!DOCTYPE module PUBLIC
-    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
-    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+        "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <!--
     Checkstyle configuration based on
@@ -94,11 +94,9 @@
         <module name="SuperFinalize" />
         <module name="IllegalCatch" />
         <module name="IllegalThrows" />
-        <module name="ExplicitInitialization" />
         <module name="DefaultComesLast" />
         <module name="FallThrough" />
         <module name="MultipleVariableDeclarations" />
-        <module name="VisibilityModifier" />
         <module name="FinalClass" />
         <module name="HideUtilityClassConstructor" />
 
