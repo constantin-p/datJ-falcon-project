@@ -97,7 +97,8 @@ public class ModalDispatcher {
     public Service showEditServiceModal(Stage stage, Service service) {
         return (Service) showModal(stage, (Stage modalStage) -> {
             return new ServiceFormController(this, modalStage,
-                    false, new Service(service.id, service.name.get(), service.minAge.get(), service.description.get()));
+                    false, new Service(service.id, service.name.get(), service.minAge.get(),
+                    service.minParticipant.get(),service.maxParticipant.get(), service.description.get()));
         });
     }
 

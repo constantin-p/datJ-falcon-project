@@ -14,24 +14,30 @@ import java.util.List;
 
 public class Service implements Storable {
     public static final String DB_TABLE_NAME = "services";
-    public static final String[] DB_TABLE_COLUMNS = {"id", "name", "min_age", "description"};
+    public static final String[] DB_TABLE_COLUMNS = {"id", "name", "min_age", "min_participants", "max_participants", "description"};
 
     public String id;
     public StringProperty name;
     public IntegerProperty minAge;
+    public IntegerProperty minParticipant;
+    public IntegerProperty maxParticipant;
     public StringProperty description;
 
     public Service() {
         id = null;
         name = new SimpleStringProperty("");
         minAge = new SimpleIntegerProperty(0);
+        minParticipant = new SimpleIntegerProperty(0);
+        maxParticipant = new SimpleIntegerProperty(0);
         description = new SimpleStringProperty("");
     }
 
-    public Service(String id, String name, int age, String description) {
+    public Service(String id, String name, int age, int minParticipants, int maxParticipants, String description) {
         this.id = id;
         this.name = new SimpleStringProperty(name);
         this.minAge = new SimpleIntegerProperty(age);
+        this.minParticipant = new SimpleIntegerProperty(minParticipants);
+        this.maxParticipant = new SimpleIntegerProperty(maxParticipants);
         this.description = new SimpleStringProperty(description);
     }
 
@@ -44,6 +50,8 @@ public class Service implements Storable {
 
         values.put("name", name.getValue());
         values.put("min_age", minAge.getValue().toString());
+        values.put("min_participants", minParticipant.getValue().toString());
+        values.put("max_participants", maxParticipant.getValue().toString());
         values.put("description", description.getValue());
 
         return values;
@@ -54,10 +62,12 @@ public class Service implements Storable {
         String id = valuesMap.get("id");
         String name = valuesMap.get("name");
         int minAge = Integer.valueOf(valuesMap.get("min_age"));
+        int minParticipant = Integer.valueOf(valuesMap.get("min_participants"));
+        int maxParticipant = Integer.valueOf(valuesMap.get("max_participants"));
         String description = valuesMap.get("description");
 
 
-        return new Service(id, name, minAge, description);
+        return new Service(id, name, minAge, minParticipant, maxParticipant, description);
     }
 
 
@@ -133,10 +143,12 @@ public class Service implements Storable {
         }
     }
 
-    public static int dbUpdate(String serviceID, String name, Integer minAge, String description) {
+    public static int dbUpdate(String serviceID, String name, Integer age, Integer minParticipants, Integer maxParticipants, String description) {
         HashMap<String, String> entry = new HashMap<>();
         entry.put("name", name);
-        entry.put("min_age", minAge.toString());
+        entry.put("min_age", age.toString());
+        entry.put("min_participants", minParticipants.toString());
+        entry.put("max_participants", maxParticipants.toString());
         entry.put("description", description);
 
         HashMap<String, String> whitelist = new HashMap<>();
