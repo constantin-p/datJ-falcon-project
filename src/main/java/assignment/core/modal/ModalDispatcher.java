@@ -1,5 +1,8 @@
 package assignment.core.modal;
 
+import assignment.core.modal.selector.AccountTypeSelectorController;
+import assignment.model.Account;
+import assignment.model.AccountType;
 import assignment.model.Service;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -60,6 +63,27 @@ public class ModalDispatcher {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public AccountType showCreateAccountTypeModal(Stage stage) {
+        return (AccountType) showModal(stage, (Stage modalStage) -> {
+            return new AccountTypeFormController(this, modalStage,
+                    true, new AccountType());
+        });
+    }
+
+    public AccountType showSelectAccountTypeModal(Stage stage) {
+        return (AccountType) showModal(stage, (Stage modalStage) -> {
+            return new AccountTypeSelectorController(this, modalStage,
+                    false);
+        });
+    }
+
+    public Account showCreateAccountModal(Stage stage) {
+        return (Account) showModal(stage, (Stage modalStage) -> {
+            return new AccountFormController(this, modalStage,
+                    true, new Account());
+        });
     }
 
     public Service showCreateServiceModal(Stage stage) {

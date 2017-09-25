@@ -63,8 +63,6 @@ public class ServiceFormController extends ModalBaseController {
         nameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             isNameValid.set(ValidationHandler.showError(errorLabel,
                     ValidationHandler.validateSessionName(newValue)));
-            System.out.println(isNameValid + " " + isMinAgeValid + " " + isDescriptionValid);
-
         });
 
         minAgeTextField.textProperty().bindBidirectional(service.minAge, new NumberStringConverter());

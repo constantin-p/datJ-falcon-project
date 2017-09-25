@@ -26,27 +26,27 @@
             maxHeight="22.0"
             VBox.vgrow="NEVER">
             <children>
-                <Button styleClass="text-button"
-                    text="Sign out"
-                    onAction="#handleSignOutAction"
-                    HBox.hgrow="ALWAYS" >
-                    <padding>
-                        <Insets left="0.0" right="15.0" />
-                    </padding>
-                </Button>
-                <Pane
-                    prefHeight="-1.0"
-                    prefWidth="-1.0"
-                    HBox.hgrow="ALWAYS" />
                 <Label
                     text="Signed in as: "
                     HBox.hgrow="ALWAYS"/>
                 <Label fx:id="usernameLabel"
                     HBox.hgrow="ALWAYS"/>
+                <Pane
+                    prefHeight="-1.0"
+                    prefWidth="-1.0"
+                    HBox.hgrow="ALWAYS" />
+                <Button styleClass="text-button"
+                    text="Sign out"
+                    onAction="#handleSignOutAction"
+                    HBox.hgrow="ALWAYS" >
+                    <padding>
+                        <Insets left="0.0" right="0.0" />
+                    </padding>
+                </Button>
             </children>
             <padding>
                 <Insets
-                    left="0.0"
+                    left="5.0"
                     right="5.0" />
             </padding>
         </HBox>

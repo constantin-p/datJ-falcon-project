@@ -17,7 +17,7 @@
             VBox.vgrow="NEVER">
             <children>
                 <Button
-                    text="Add service"
+                    text="Add account type"
                     defaultButton="true"
                     onAction="#handleAddAction" />
             </children>

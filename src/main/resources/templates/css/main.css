@@ -367,6 +367,13 @@
   -fx-text-fill: -cp-ui-base-color;
 }
 
+.text-field {
+    -fx-prompt-text-fill: derive(-cp-control-base-color,-30%);
+}
+.text-field:focused {
+    -fx-prompt-text-fill: derive(-cp-control-base-color,-30%);
+}
+
 .text-field:focused,
 .text-area:focused {
   -fx-background-color: -cp-accent-color, -cp-ui-bg-light-color;
@@ -419,14 +426,14 @@
 }
 
 .button.text-button {
-  -fx-padding: 1 12 1 12;
+  -fx-padding: 1;
   -fx-border-width: 0;
-  -fx-text-fill: -cp-ui-light-color;
+  -fx-text-fill: -cp-ui-base-color;
   -fx-background-color: transparent;
 }
 
 .button.text-button:hover {
-  -fx-text-fill: -cp-ui-base-color;
+  -fx-text-fill: -cp-accent-color;
   -fx-underline: true;
 }
 
@@ -434,14 +441,13 @@
  *   Check box
  */
 .check-box > .box {
-  -fx-padding: 3 12 3 12;
-  -fx-border-width: 1;
-  -fx-border-radius: 3;
-  -fx-border-color: -cp-ui-border-base-color;
-  -fx-background-color: white;
-  -fx-background-insets: 0, 0;
-  -fx-background-radius: 3;
-  -fx-text-fill: -cp-control-dark-color;
+  -fx-border-width: 0;
+  -fx-border-insets: 0, 0;
+  -fx-background-color: -cp-ui-border-dark-color, -cp-ui-bg-light-color;
+  -fx-background-insets: 0, 1;
+  -fx-background-radius: 2, 1;
+  -fx-text-fill: -cp-control-base-color;
+
   -fx-cursor: hand;
   -fx-padding: 0.25em;
 }
@@ -454,8 +460,80 @@
 }
 
 .check-box:selected > .box > .mark {
-    -fx-background-color: -fx-mark-highlight-color, -cp-ui-light-color;
+  -fx-background-color: white, -cp-accent-color;
 }
+
+/*
+ *   Toogle buttons
+ */
+.toggle-button {
+  -fx-padding: 3 12 3 12;
+  -fx-border-width: 0;
+  -fx-background-color: -cp-ui-shadow-base-color, -cp-ui-border-base-color, -cp-control-base-gradient;
+  -fx-background-insets: 0, 0 0 1 0, 1 1 2 0;
+  -fx-background-radius: 0;
+  -fx-text-fill: -cp-ui-base-color;
+  -fx-cursor: hand;
+}
+
+.toggle-button.toggle-button-first {
+  -fx-background-insets: 0, 0 0 1 0, 1 1 2 1;
+  -fx-background-radius: 2 0 0 2, 2 0 0 2, 1 0 0 1;
+}
+
+.toggle-button.toggle-button-last {
+  -fx-background-radius: 0 2 2 0, 0 2 2 0, 0 1 1 0;
+}
+
+.toggle-button:hover {
+  -fx-background-color: -cp-ui-shadow-base-color, -cp-ui-border-dark-color, -cp-control-light-gradient;
+}
+
+.toggle-button:selected {
+  -fx-background-color: -cp-ui-shadow-base-color, -cp-accent-color, -cp-control-accent-gradient;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+}
+
+
+
+/*
+ *   Spinner
+ */
+.spinner {
+  -fx-border-insets: 0, 0;
+  -fx-background-radius: 2, 1;
+}
+
+.spinner:focused {
+  -fx-border-insets: 0, 0;
+  -fx-background-insets: 0, 0;
+  -fx-background-radius: 2, 1;
+}
+
+.spinner > .text-field {
+  -fx-background-radius: 2 0 0 2, 1 0 0 1;
+}
+
+.spinner > .increment-arrow-button,
+.spinner > .decrement-arrow-button {
+  -fx-border-insets: 0, 0;
+  -fx-background-color: -cp-control-border-light-color, -cp-control-base-gradient;
+  -fx-background-insets: 0, 1 1 1 0;
+  -fx-background-radius: 0 2 2 0, 0 1 1 0;
+}
+
+.spinner > .increment-arrow-button:hover,
+.spinner > .decrement-arrow-button:hover {
+  -fx-background-color: -cp-ui-border-dark-color, -cp-control-light-gradient;
+  -fx-background-insets: 0, 1 1 1 0;
+}
+
+.spinner > .decrement-arrow-button,
+.spinner > .decrement-arrow-button:hover { 
+  -fx-background-insets: 0, 0 1 1 0;
+}
+
 
 /*
  *   Date picker
@@ -467,23 +545,32 @@
 }
 
 .date-picker > .text-field {
-    -fx-background-radius: 3 0 0 3, 2 0 0 2;
+  -fx-background-radius: 2 0 0 2, 1 0 0 1;
 }
 
 .combo-box-base > .arrow-button {
-    -fx-border-insets: 0, 0;
-    -fx-background-color: -cp-control-border-light-color, white;
-    -fx-background-insets: 0, 1 1 1 0;
+  -fx-border-insets: 0, 0;
+  -fx-background-color: -cp-control-border-light-color, -cp-control-base-gradient;
+  -fx-background-insets: 0, 1 1 1 0;
+  -fx-background-radius: 0 2 2 0, 0 1 1 0;
+}
+
+.combo-box-base > .arrow-button:hover {
+  -fx-background-color: -cp-ui-border-dark-color, -cp-control-light-gradient;
+  -fx-background-insets: 0, 1 1 1 0;
 }
 
 .date-picker-popup {
-    -fx-background-color: -cp-ui-border-base-color;
+  -fx-background-color: -cp-ui-border-dark-color;
+  -fx-border-insets: 0, 1;
+  -fx-padding: 1;
+  -fx-effect: dropshadow(gaussian, -cp-ui-shadow-base-color, 4, 0.0, 0, 2);
 }
 
 .date-picker-popup > .month-year-pane {
-    -fx-background-color: -cp-ui-bg-base-color;
-    -fx-background-insets: 0;
-    -fx-background-radius: 0;
+  -fx-background-color: -cp-ui-bg-base-color;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
 }
 
 .date-picker-popup > * > .spinner > .button > .right-arrow {
@@ -565,19 +652,25 @@
 .validation-error { }
 .validation-clear { }
 
-
+/*
+ *   Tooltip
+ */
+.detail-tooltip {
+    -fx-background-color: -cp-ui-border-base-color, -cp-ui-bg-base-color;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 2, 1;
+}
 
 /*
  *   Scroll
  */
-
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
   -fx-background-color: -cp-ui-bg-base-color;
   -fx-background-radius: 0;
   -fx-border-radius: 0;
   -fx-border-width: 0;
-  -fx-pading: 1;
+  -fx-padding: 1;
 }
 
 .scroll-bar:horizontal .increment-button ,

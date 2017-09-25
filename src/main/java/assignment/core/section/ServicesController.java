@@ -10,14 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import ui.DetailTooltip;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServicesController implements UISection {
     private static final String ACCESS_TYPE_NAME = "services";
@@ -46,6 +46,8 @@ public class ServicesController implements UISection {
         actionColumn.setCellFactory(getActionCellFactory());
         actionColumn.getStyleClass().add("align-center");
 
+
+        tableView.setRowFactory(getRowFactory());
         tableView.getColumns().addAll(nameColumn, minAgeColumn, actionColumn);
         tableView.setItems(serviceList);
 
@@ -123,6 +125,30 @@ public class ServicesController implements UISection {
                 };
                 return cell;
             }
+        };
+    }
+
+    private Callback<TableView<Service>, TableRow<Service>> getRowFactory() {
+        return new Callback<TableView<Service>, TableRow<Service>>() {
+            @Override
+            public TableRow<Service> call(TableView<Service> tableView) {
+
+                final TableRow<Service> row = new TableRow<>();
+                row.hoverProperty().addListener((observable) -> {
+                    final Service service = row.getItem();
+
+                    if (row.isHover() && service != null) {
+                        Map<String, String> details = new LinkedHashMap<>();
+                        details.put("Name", service.name.getValue());
+                        details.put("Age limit", service.minAge.getValue().toString());
+                        details.put("Details", service.description.getValue());
+                        rootController.tooltipDispatcher.show(row.hoverProperty(), row.localToScreen(row.getBoundsInLocal()), details);
+                    }
+                });
+
+                return row;
+            }
+
         };
     }
 }
