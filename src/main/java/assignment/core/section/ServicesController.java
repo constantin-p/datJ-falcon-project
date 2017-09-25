@@ -45,13 +45,20 @@ public class ServicesController implements UISection {
         TableColumn<Service, String> minAgeColumn = new TableColumn("Age limit");
         minAgeColumn.setCellValueFactory(cellData -> cellData.getValue().minAge.asString());
 
+        TableColumn<Service, String> minParticipantsColumn = new TableColumn("Min participants");
+        minParticipantsColumn.setCellValueFactory(cellData -> cellData.getValue().minParticipant.asString());
+
+        TableColumn<Service, String> maxParticipantsColumn = new TableColumn("Max participants");
+        maxParticipantsColumn.setCellValueFactory(cellData -> cellData.getValue().maxParticipant.asString());
+
+
         TableColumn<Service, String> actionColumn = new TableColumn("Actions");
         actionColumn.setCellFactory(getActionCellFactory());
         actionColumn.getStyleClass().add("align-center");
 
 
         tableView.setRowFactory(getRowFactory());
-        tableView.getColumns().addAll(nameColumn, minAgeColumn, actionColumn);
+        tableView.getColumns().addAll(nameColumn, minAgeColumn, minParticipantsColumn, maxParticipantsColumn, actionColumn);
         tableView.setItems(serviceList);
 
         populateTableView();

@@ -91,7 +91,8 @@ public class ServiceFormController extends ModalBaseController {
         } else {
             boolean success = ValidationHandler.showError(errorLabel,
                 ValidationHandler.validateServiceDBOperation(
-                    Service.dbUpdate(service.id, service.name.get(), service.minAge.get(), service.minParticipant.get(), service.maxParticipant.get(), service.description.get())
+                    Service.dbUpdate(service.id, service.name.get(), service.minAge.get(), service.minParticipant.get(),
+                        service.maxParticipant.get(), service.description.get())
                 ));
 
             if (success) {
