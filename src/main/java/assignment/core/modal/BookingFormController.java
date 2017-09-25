@@ -1,7 +1,6 @@
 package assignment.core.modal;
 
 import assignment.model.Booking;
-import assignment.util.ValidationHandler;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -99,7 +98,7 @@ public class BookingFormController extends ModalBaseController {
 
 //            if (success) {
                 // service = Service.dbGetByName(service.name.getValue());
-                super.handleOKAction(event);
+            super.handleOKAction(event);
 //            }
         } else {
 //            boolean success = ValidationHandler.showError(errorLabel,

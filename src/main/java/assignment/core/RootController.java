@@ -2,8 +2,12 @@ package assignment.core;
 
 import assignment.core.auth.AuthManager;
 import assignment.core.modal.ModalDispatcher;
-import assignment.core.section.*;
 
+import assignment.core.section.AccountTypesController;
+import assignment.core.section.AccountsController;
+import assignment.core.section.BookingsController;
+import assignment.core.section.ServicesController;
+import assignment.core.section.UISection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
