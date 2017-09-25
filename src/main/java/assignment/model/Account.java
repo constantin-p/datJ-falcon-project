@@ -15,8 +15,9 @@ import java.util.List;
 
 public class Account implements Storable {
     public static final String DB_TABLE_NAME = "accounts";
+    public static final String[] DB_TABLE_COLUMNS = {"id", "username", "accounttype_id"};
 
-    private String id;
+    public String id;
     public StringProperty username;
     public ObjectProperty<AccountType> type;
 
@@ -65,13 +66,35 @@ public class Account implements Storable {
     /*
      *  DB helpers
      */
+    public static Account dbGet(String accountID) {
+        if (accountID == null) {
+            throw new IllegalArgumentException("Invalid ID given as argument! [null]");
+        }
+        HashMap<String, String> searchQuery = new HashMap<>();
+        searchQuery.put("id", accountID);
+
+        try {
+            HashMap<String, String> returnValues = Database.getTable(DB_TABLE_NAME)
+                    .get(Arrays.asList(DB_TABLE_COLUMNS),
+                            searchQuery, new HashMap<>());
+
+            if (returnValues.get("id") != null && returnValues.get("id").equals(accountID)) {
+                return Account.construct(returnValues);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static Account dbGetByUsername(String username) {
         HashMap<String, String> searchQuery = new HashMap<>();
         searchQuery.put("username", username);
 
         try {
             HashMap<String, String> returnValues = Database.getTable(Account.DB_TABLE_NAME)
-                    .get(Arrays.asList("id", "username", "accounttype_id"),
+                    .get(Arrays.asList(DB_TABLE_COLUMNS),
                             searchQuery, new HashMap<>());
 
             if (returnValues.get("username") != null && returnValues.get("username").equals(username)) {
@@ -88,7 +111,7 @@ public class Account implements Storable {
         List<Account> result = new ArrayList<>();
         try {
             List<HashMap<String, String>> returnList = Database.getTable(Account.DB_TABLE_NAME)
-                    .getAll(Arrays.asList("id", "username", "accounttype_id"),
+                    .getAll(Arrays.asList(DB_TABLE_COLUMNS),
                             null, null);
 
             returnList.forEach((HashMap<String, String> valuesMap) -> {

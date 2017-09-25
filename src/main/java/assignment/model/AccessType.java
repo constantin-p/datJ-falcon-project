@@ -13,6 +13,7 @@ import java.util.List;
 
 public class AccessType implements Storable {
     private static final String DB_TABLE_NAME = "accesstypes";
+    public static final String[] DB_TABLE_COLUMNS = {"id", "name"};
 
     public String id;
     public StringProperty name;
@@ -58,7 +59,7 @@ public class AccessType implements Storable {
 
         try {
             HashMap<String, String> returnValues = Database.getTable(AccessType.DB_TABLE_NAME)
-                    .get(Arrays.asList("id", "name"), searchQuery, new HashMap<>());
+                    .get(Arrays.asList(DB_TABLE_COLUMNS), searchQuery, new HashMap<>());
 
             if (returnValues.get("id") != null && returnValues.get("id").equals(accessTypeID)) {
                 return AccessType.construct(returnValues);
@@ -75,7 +76,7 @@ public class AccessType implements Storable {
 
         try {
             List<HashMap<String, String>> returnList = Database.getTable(AccessType.DB_TABLE_NAME)
-                    .getAll(Arrays.asList("id", "name"), null, null);
+                    .getAll(Arrays.asList(DB_TABLE_COLUMNS), null, null);
 
             returnList.forEach((HashMap<String, String> valuesMap) -> {
                 result.add(AccessType.construct(valuesMap));

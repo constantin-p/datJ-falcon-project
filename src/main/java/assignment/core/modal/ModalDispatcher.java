@@ -3,6 +3,7 @@ package assignment.core.modal;
 import assignment.core.modal.selector.AccountTypeSelectorController;
 import assignment.model.Account;
 import assignment.model.AccountType;
+import assignment.model.Booking;
 import assignment.model.Service;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -97,6 +98,21 @@ public class ModalDispatcher {
         return (Service) showModal(stage, (Stage modalStage) -> {
             return new ServiceFormController(this, modalStage,
                     false, new Service(service.id, service.name.get(), service.minAge.get(), service.description.get()));
+        });
+    }
+
+    public Booking showCreateBookingModal(Stage stage) {
+        return (Booking) showModal(stage, (Stage modalStage) -> {
+            return new BookingFormController(this, modalStage,
+                    true, new Booking());
+        });
+    }
+
+    public Booking showEditBookingModal(Stage stage, Booking booking) {
+        return (Booking) showModal(stage, (Stage modalStage) -> {
+            return new BookingFormController(this, modalStage,
+                    false, new Booking(booking.id, booking.startDateTime.get(), booking.endDateTime.get(),
+                    booking.service.get(), booking.account.get()));
         });
     }
 }

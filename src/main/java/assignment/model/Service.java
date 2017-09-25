@@ -16,7 +16,6 @@ public class Service implements Storable {
     public static final String DB_TABLE_NAME = "services";
     public static final String[] DB_TABLE_COLUMNS = {"id", "name", "min_age", "description"};
 
-
     public String id;
     public StringProperty name;
     public IntegerProperty minAge;
@@ -65,6 +64,28 @@ public class Service implements Storable {
     /*
      *  DB helpers
      */
+    public static Service dbGet(String serviceID) {
+        if (serviceID == null) {
+            throw new IllegalArgumentException("Invalid ID given as argument! [null]");
+        }
+        HashMap<String, String> searchQuery = new HashMap<>();
+        searchQuery.put("id", serviceID);
+
+        try {
+            HashMap<String, String> returnValues = Database.getTable(DB_TABLE_NAME)
+                    .get(Arrays.asList(DB_TABLE_COLUMNS),
+                            searchQuery, new HashMap<>());
+
+            if (returnValues.get("id") != null && returnValues.get("id").equals(serviceID)) {
+                return Service.construct(returnValues);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static List<Service> dbGetAll() {
         List<Service> result = new ArrayList<>();
 
@@ -131,7 +152,6 @@ public class Service implements Storable {
     }
 
     public static int dbDelete(String serviceID) {
-
 
         HashMap<String, String> whitelist = new HashMap<>();
         whitelist.put("id", serviceID);

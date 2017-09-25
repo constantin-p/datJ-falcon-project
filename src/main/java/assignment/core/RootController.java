@@ -2,10 +2,7 @@ package assignment.core;
 
 import assignment.core.auth.AuthManager;
 import assignment.core.modal.ModalDispatcher;
-import assignment.core.section.AccountTypesController;
-import assignment.core.section.AccountsController;
-import assignment.core.section.ServicesController;
-import assignment.core.section.UISection;
+import assignment.core.section.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,6 +52,8 @@ public class RootController {
             () -> new AccountsController(this));
         loadSection(ServicesController.getAccessTypeName(),
             () -> new ServicesController(this));
+        loadSection(BookingsController.getAccessTypeName(),
+            () -> new BookingsController(this));
     }
 
     private void loadSection(String accessTypeName, Supplier<UISection> createSectionControllerRequest) {

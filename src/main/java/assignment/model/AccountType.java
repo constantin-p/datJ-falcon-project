@@ -16,6 +16,7 @@ import java.util.List;
 public class AccountType implements Storable {
     private static final String DB_TABLE_NAME = "accounttypes";
     private static final String DB_INTERSECTION_TABLE_NAME = "accounttype_accesstype";
+    public static final String[] DB_TABLE_COLUMNS = {"id", "name"};
 
     public String id;
     public StringProperty name;
@@ -90,7 +91,7 @@ public class AccountType implements Storable {
 
         try {
             HashMap<String, String> returnValues = Database.getTable(DB_TABLE_NAME)
-                    .get(Arrays.asList("id", "name"), searchQuery, new HashMap<>());
+                    .get(Arrays.asList(DB_TABLE_COLUMNS), searchQuery, new HashMap<>());
 
             if (returnValues.get("id") != null && returnValues.get("id").equals(accountTypeID)) {
                 return AccountType.construct(returnValues);
@@ -108,7 +109,7 @@ public class AccountType implements Storable {
 
         try {
             HashMap<String, String> returnValues = Database.getTable(DB_TABLE_NAME)
-                    .get(Arrays.asList("id", "name"), searchQuery, new HashMap<>());
+                    .get(Arrays.asList(DB_TABLE_COLUMNS), searchQuery, new HashMap<>());
 
             if (returnValues.get("name") != null && returnValues.get("name").equals(name)) {
                 return AccountType.construct(returnValues);
@@ -125,7 +126,7 @@ public class AccountType implements Storable {
 
         try {
             List<HashMap<String, String>> returnList = Database.getTable(DB_TABLE_NAME)
-                    .getAll(Arrays.asList("id", "name"), null, null);
+                    .getAll(Arrays.asList(DB_TABLE_COLUMNS), null, null);
 
             returnList.forEach((HashMap<String, String> valuesMap) -> {
                 result.add(AccountType.construct(valuesMap));
